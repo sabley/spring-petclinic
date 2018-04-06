@@ -21,6 +21,7 @@ pipeline {
         stage('Scan App - Build Container') {
             steps{
                 parallel('IQ-BOM': {
+                    echo '...'
                     /*nexusPolicyEvaluation failBuildOnNetworkError: false, 
                     iqApplication: 'petclinic', 
                     iqStage: 'build', 
