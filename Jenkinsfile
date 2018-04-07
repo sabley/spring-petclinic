@@ -22,12 +22,11 @@ pipeline {
         stage('Scan App - Build Container') {
             steps{
                 parallel('IQ-BOM': {
-                    echo '...'
-                    /*nexusPolicyEvaluation failBuildOnNetworkError: false, 
+                    nexusPolicyEvaluation failBuildOnNetworkError: false, 
                     iqApplication: 'petclinic', 
                     iqStage: 'build', 
                     iqScanPatterns: [[scanPattern: '']], 
-                    jobCredentialsId: ''*/
+                    jobCredentialsId: ''
                  },
                  'Static Analysis': {
                     echo '...run SonarQube or other SAST tools here'
