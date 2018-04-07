@@ -9,7 +9,7 @@ pipeline {
                 sh '''
                     echo "PATH = ${PATH}"
                     echo "M2_HOME = ${M2_HOME}"
-                    ./mvnw spring-boot:build-info
+                    ./mvnw spring-boot:run
                 ''' 
             }
             post {
