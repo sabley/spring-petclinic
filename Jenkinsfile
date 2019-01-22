@@ -11,11 +11,12 @@ pipeline {
                 '''
       }
     }
-    stage ('Clean Up Previous Run')
+    stage ('Clean Up Previous Run') {
       steps {
           deleteComponents nexusInstanceId: 'nx3', tagName: 'build-125'
           createTag nexusInstanceId: 'nx3', tagAttributesJson: '{"createdBy" : "Moose"}', tagName: 'build-120'
       }
+    }
      stage ('Creating build tag') {
       steps {
             createTag nexusInstanceId: 'nx3', tagAttributesJson: '{"createdBy" : "Moose"}', tagName: 'build-125'
