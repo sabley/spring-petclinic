@@ -1,6 +1,13 @@
 pipeline {
   agent any
   stages {
+    stage ('Clean Up Previous Run') {
+      steps {
+          deleteComponents nexusInstanceId: 'nx3', tagName: 'build-125'
+          deleteTag nexusInstanceId: 'nx3', tagName: 'build-125'
+          createTag nexusInstanceId: 'nx3', tagAttributesJson: '{"createdBy" : "Moose"}', tagName: 'build-120'
+      }
+    }
     stage('Build') {
       steps {
         sh '''
@@ -9,13 +16,6 @@ pipeline {
                     mvn versions:set -DnewVersion=2.0.0
                     mvn package -B -DskipTests=true
                 '''
-      }
-    }
-    stage ('Clean Up Previous Run') {
-      steps {
-          deleteComponents nexusInstanceId: 'nx3', tagName: 'build-125'
-          deleteTag nexusInstanceId: 'nx3', tagName: 'build-125'
-          createTag nexusInstanceId: 'nx3', tagAttributesJson: '{"createdBy" : "Moose"}', tagName: 'build-120'
       }
     }
      stage ('Creating build tag') {
