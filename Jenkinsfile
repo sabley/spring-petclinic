@@ -108,7 +108,7 @@ pipeline {
       }
     }
     stage('Publish Container') {
-      when {
+      steps {
         input "Clean Up??"
       }
       steps {
