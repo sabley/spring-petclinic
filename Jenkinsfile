@@ -28,6 +28,7 @@ pipeline {
     }
     stage ('Move') {
         steps {
+            input "Deploy to Prod?"
             moveComponents destination: 'maven-test', nexusInstanceId: 'nx3', tagName: 'build-123'
         }
     }
