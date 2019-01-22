@@ -61,7 +61,10 @@ pipeline {
         }
         stage('Build Container') {
           steps {
-            echo '...need to learn the build process first'
+            sh ''' 
+                cd target
+                docker build -t test-boot .
+            '''
           }
         }
       }
