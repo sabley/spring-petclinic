@@ -6,6 +6,7 @@ pipeline {
         sh '''
                     echo "PATH = ${PATH}"
                     echo "M2_HOME = ${M2_HOME}"
+                    mvn versions:set -DnewVersion=2.0.0
                     mvn package -B -DskipTests=true
                 '''
       }
