@@ -17,7 +17,7 @@ pipeline {
     }
     stage ('Publishing') {
         steps {
-            nexusPublisher nexusInstanceId: 'nx3', nexusRepositoryId: 'maven-releases', packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: '', filePath: 'webgoat-container/target/webgoat-container-8.0.0.M3.jar']], mavenCoordinate: [artifactId: 'fancyWidget', groupId: 'com.mycompany', packaging: 'jar', version: '1.1']]], tagName: 'build-125'
+            nexusPublisher nexusInstanceId: 'nx3', nexusRepositoryId: 'maven-releases', packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: '', filePath: 'target/spring-petclinic-2.0.0.BUILD-SNAPSHOT.jar']], mavenCoordinate: [artifactId: 'fancyWidget', groupId: 'com.mycompany', packaging: 'jar', version: '1.1']]], tagName: 'build-125'
         }
     }
     stage ('Move') {
