@@ -6,6 +6,7 @@ pipeline {
        sh '''
                    echo "PATH = ${PATH}"
                    echo "M2_HOME = ${M2_HOME}"
+                   mvn help:evaluate -Dexpression=settings.localRepository
                    mvn versions:set -DnewVersion=2.0.0
                    mvn package -B -DskipTests=true
                '''
@@ -36,7 +37,7 @@ pipeline {
         } 
       }
     }
-    stage ('Move') {
+    stage ('Next Steps') {
       steps {
           input "Deploy to Prod?"
           moveComponents destination: 'maven-test', nexusInstanceId: 'nx3', tagName: 'build-123'
