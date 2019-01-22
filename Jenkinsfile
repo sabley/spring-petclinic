@@ -14,6 +14,7 @@ pipeline {
     stage ('Clean Up Previous Run') {
       steps {
           deleteComponents nexusInstanceId: 'nx3', tagName: 'build-125'
+          deleteTag nexusInstanceId: 'nx3', tagName: 'build-125'
           createTag nexusInstanceId: 'nx3', tagAttributesJson: '{"createdBy" : "Moose"}', tagName: 'build-120'
       }
     }
