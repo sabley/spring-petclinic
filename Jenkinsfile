@@ -63,8 +63,7 @@ pipeline {
         stage('Build Container') {
           steps {
             sh ''' 
-                cd target
-                docker build -t test-boot .
+               docker build -t test-boot .
             '''
           }
         }
