@@ -109,10 +109,15 @@ pipeline {
     }
     stage('Publish Container') {
       when {
-        branch 'master'
+        input "Clean Up??"
       }
       steps {
-        echo '...figure out container'
+        deleteComponents nexusInstanceId: 'nx3', tagName: 'build-125'
+        deleteComponents nexusInstanceId: 'nx3', tagName: 'build-123'
+        sh '''
+            curl --verbose -u admin:admin123 -X DELETE "http://nexus:8081/service/rest/v1/tags/build-125" -H "accept: application/json"
+            curl --verbose -u admin:admin123 -X DELETE "http://nexus:8081/service/rest/v1/tags/build-123" -H "accept: application/json"
+        '''
       }
     }
   }
