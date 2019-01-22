@@ -1,28 +1,26 @@
 pipeline {
   agent any
   stages {
-    parallel {
-      stage ('Clean Up Previous Run') {
+   stage ('Clean Up Previous Run') {
+     steps {
+         deleteComponents nexusInstanceId: 'nx3', tagName: 'build-125'
+         deleteTag nexusInstanceId: 'nx3', tagName: 'build-125'
+         createTag nexusInstanceId: 'nx3', tagAttributesJson:         '{"createdBy" : "Moose"}', tagName: 'build-120'
+         currentBuild.result = 'SUCCESS'
+     }
+   }
+   stage('Build') {
+     steps {
+       sh '''
+                   echo "PATH = ${PATH}"
+                   echo "M2_HOME = ${M2_HOME}"
+                   mvn versions:set -DnewVersion=2.0.0
+                   mvn package -B -DskipTests=true
+               '''
+       }
+     }
+      stage ('Creating build tag') {
         steps {
-            deleteComponents nexusInstanceId: 'nx3', tagName: 'build-125'
-            deleteTag nexusInstanceId: 'nx3', tagName: 'build-125'
-            createTag nexusInstanceId: 'nx3', tagAttributesJson:      '{"createdBy" : "Moose"}', tagName: 'build-120'
-            currentBuild.result = 'SUCCESS'
-        }
-      }
-      stage('Build') {
-        steps {
-          sh '''
-                      echo "PATH = ${PATH}"
-                      echo "M2_HOME = ${M2_HOME}"
-                      mvn versions:set -DnewVersion=2.0.0
-                      mvn package -B -DskipTests=true
-                  '''
-          }
-        }
-      }
-     stage ('Creating build tag') {
-      steps {
             createTag nexusInstanceId: 'nx3', tagAttributesJson: '{"createdBy" : "Moose"}', tagName: 'build-125'
         }
     }
