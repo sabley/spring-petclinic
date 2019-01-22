@@ -107,10 +107,12 @@ pipeline {
 
       }
     }
-    stage('Publish Container') {
+    stage('Clean Up Validation') {
       steps {
         input "Clean Up??"
       }
+    }
+    stage('Delete all the things') {
       steps {
         deleteComponents nexusInstanceId: 'nx3', tagName: 'build-125'
         deleteComponents nexusInstanceId: 'nx3', tagName: 'build-123'
