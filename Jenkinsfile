@@ -9,13 +9,6 @@ pipeline {
                     mvn package -B
                 '''
       }
-      post {
-        always {
-          junit '**/target/surefire-reports/**/*.xml'
-
-        }
-
-      }
     }
      stage ('Creating build tag') {
       steps {
