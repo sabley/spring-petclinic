@@ -6,7 +6,6 @@ pipeline {
         sh '''
                     echo "PATH = ${PATH}"
                     echo "M2_HOME = ${M2_HOME}"
-                    mvn help:evaluate -Dexpression=settings.localRepository
                     mvn versions:set -DnewVersion=2.0.0
                     mvn package -B -DskipTests=true
                 '''
@@ -19,8 +18,8 @@ pipeline {
     }
     stage ('Creating build tag') {
           steps {
-              createTag nexusInstanceId: 'nx3', tagAttributesJson: '{"createdBy" : "Moose"}', tagName: 'build-123'
-              createTag nexusInstanceId: 'nx3', tagAttributesJson: '{"createdBy" : "Moose"}', tagName: 'build-125'
+              createTag nexusInstanceId: 'nx3', tagAttributesJson: '{ "name": "project-abc-142", "attributes": { "jvm": "9", "built-by": "jenkins", "tech-owner": "Moose", "Jira Tickets": { "Ticket-1234": "Link", "Ticket-1235": "Link", "Ticket-1236": "Link"}}}', tagName: 'build-123'
+              createTag nexusInstanceId: 'nx3', tagAttributesJson: '{ "name": "project-abc-142", "attributes": { "jvm": "9", "built-by": "jenkins", "tech-owner": "Moose"}}', tagName: 'build-125'
           }
     }
     stage ('Upload to Nexus Repository') {
