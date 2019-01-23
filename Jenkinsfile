@@ -13,11 +13,9 @@ pipeline {
         }
     }
     stage('LifeCycle Scan - CI') {
-        stage('Lifecycle Scan') {
           steps {
             nexusPolicyEvaluation(iqApplication: 'petclinic', iqStage: 'build', iqScanPatterns: [[scanPattern: '']])
           }
-        }
     }
     stage ('Creating build tag') {
           steps {
