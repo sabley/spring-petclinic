@@ -62,7 +62,7 @@ pipeline {
         }
         stage('Build Container') {
           steps {
-            echo ... container build
+            echo '... container build'
           }
         }
       }
