@@ -62,7 +62,7 @@ pipeline {
         }
         stage('Build Container') {
           steps {
-            
+            echo ... container build
           }
         }
       }
@@ -115,7 +115,7 @@ pipeline {
         deleteComponents nexusInstanceId: 'nx3', tagName: 'build-125'
         deleteComponents nexusInstanceId: 'nx3', tagName: 'build-123'
         sh '''
-            curl --verbose -u admin:admin123 -X DELETE "http://ec2-54-165-203-133.compute-1.amazonaws.com:8081/service/rest/v1/tags/build-125" -H "accept: application/json"
+            curl --verbose -u admin:admin123 -X DELETE "http://http://ec2-54-165-203-133.compute-1.amazonaws.com:8081/service/rest/v1/tags/build-125" -H "accept: application/json"
             curl --verbose -u admin:admin123 -X DELETE "http://ec2-54-165-203-133.compute-1.amazonaws.com:8081/service/rest/v1/tags/build-123" -H "accept: application/json"
         '''
       }
