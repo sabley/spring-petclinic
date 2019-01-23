@@ -226,4 +226,15 @@
     </license>
   </licenses>
 
+    <distributionManagement>
+        <snapshotRepository>
+            <id>nexus-snapshots</id>
+            <url>http://ec2-54-165-203-133.compute-1.amazonaws.com:8081/repository/maven-snapshots/</url>
+        </snapshotRepository>
+        <repository>
+            <id>nexus</id>
+            <url>http://ec2-54-165-203-133.compute-1.amazonaws.com:8081/repository/maven-dev/</url>
+        </repository>
+    </distributionManagement>
+
 </project>
