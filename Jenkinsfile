@@ -1,7 +1,17 @@
 pipeline {
   agent any
   stages {
-   stage('Build') {
+   stage('Build a Snapshot') {
+     steps {
+       sh '''
+                   echo "PATH = ${PATH}"
+                   echo "M2_HOME = ${M2_HOME}"
+                   mvn help:evaluate -Dexpression=settings.localRepository
+                   mvn package -B -DskipTests=true
+               '''
+       }
+     }
+   stage('Build a Release') {
      steps {
        sh '''
                    echo "PATH = ${PATH}"
@@ -115,7 +125,7 @@ pipeline {
         deleteComponents nexusInstanceId: 'nx3', tagName: 'build-125'
         deleteComponents nexusInstanceId: 'nx3', tagName: 'build-123'
         sh '''
-            curl --verbose -u admin:admin123 -X DELETE "http://http://ec2-54-165-203-133.compute-1.amazonaws.com:8081/service/rest/v1/tags/build-125" -H "accept: application/json"
+            curl --verbose -u admin:admin123 -X DELETE "http://ec2-54-165-203-133.compute-1.amazonaws.com:8081/service/rest/v1/tags/build-125" -H "accept: application/json"
             curl --verbose -u admin:admin123 -X DELETE "http://ec2-54-165-203-133.compute-1.amazonaws.com:8081/service/rest/v1/tags/build-123" -H "accept: application/json"
         '''
       }
