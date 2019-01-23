@@ -62,9 +62,7 @@ pipeline {
         }
         stage('Build Container') {
           steps {
-            sh ''' 
-               docker build -t test-boot .
-            '''
+            
           }
         }
       }
